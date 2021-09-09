@@ -1,7 +1,8 @@
 #stcok_server  
 
-**原型图**
-![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/32bf68ad62b038d7aaa4a1c9540d61a.png)
+**原型图**  
+![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/32bf68ad62b038d7aaa4a1c9540d61a.png)  
+说明文档图片资料在data_image文件夹下  
 
 ##端口说明:
 
