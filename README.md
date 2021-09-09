@@ -1,7 +1,7 @@
 #stcok_server  
 
 **原型图**  
-![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/32bf68ad62b038d7aaa4a1c9540d61a.png)  
+![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/%E5%8E%9F%E5%9E%8B%E5%9B%BE(%E4%B8%BB%E9%A1%B5%E9%9D%A2).png)  
 说明文档图片资料在data_image文件夹下  
 
 ##端口说明:
@@ -9,7 +9,10 @@
 ###/k_line
 
 **描述**：查询绘制日K线的历史数据。  
-
+**日K完整图例子**  
+![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/%E6%97%A5k%E7%BA%BF%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B.png)  
+图中上部为股票K线图，黑色虚折线为涨跌趋势线，使用point_type参数绘制，在转折日标点连接。  
+图中下部柱状图为股票换手率，turn_over_rate参数。（echarts代码参看example_code文件夹下K_line.html）
 **请求参数: -POST**
 
 |  参数名 | 类型 | 是否必须 | 说明 |
