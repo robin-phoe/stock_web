@@ -14,7 +14,7 @@
 ![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/%E6%97%A5k%E7%BA%BF%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B.png)  
 图中上部为股票K线图，黑色虚折线为涨跌趋势线，使用point_type参数绘制，在转折日标点连接。  
 图中下部柱状图为股票换手率，turn_over_rate参数。
-（echarts代码参看example_code文件夹下K_line.html）  
+（echarts代码参看 /example_code/K_line.html ）  
 
 **请求参数: -POST**
 
