@@ -1,5 +1,4 @@
 #stcok_server
-![Uploading 32bf68ad62b038d7aaa4a1c9540d61a.png…]()
 
 
 ##端口说明:
@@ -59,8 +58,7 @@ type_option：
 **回报示例：**
 
 ```
-// id:[id,trade_date,open_price,close_prcie,low_price,high_price
-    ,turn_over_rate,point_type,0,0,0]
+// id:[id,trade_date,open_price,close_prcie,low_price,high_price,turn_over_rate,point_type,0,0,0]
 {  
     "002962":[
        ["002962","2020-01-03",12.1,12.5,11.9,12.9,2.1,"n",0,0,0],
