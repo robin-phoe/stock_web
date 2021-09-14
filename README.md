@@ -21,6 +21,7 @@
 |  参数名 | 类型 | 是否必须 | 说明 |
 |  ----  | ----  | ---- | ---- |
 | type  | str    |   Y  |type_option (见下)|
+|target| str |   N |'YYYY-mm-dd',查询指定日期的监控结果，监控类type必填，None为最后交易日|
 |start_date| str |   Y |k线数据查询起始日期 'YYYY-mm-dd'(包含当日)|
 |end_date| str |   Y |k线数据查询截至日期 'YYYY-mm-dd'(包含当日)|
 |stock_id| str |   N |股票编号，当type为'single'时必填,eg:'002963'|
@@ -35,13 +36,14 @@ type_option：
 |retracement| str |   N |查询热门回撤类中所有股票的K线数据|
 |single_limit| str |   N |查询单涨停回撤类中所有股票的K线数据|
 
-需求示例：查询所有monitor类型股票从2021-02-01 到 2021-09-08 的K线数据。
+需求示例：查询最后一个交易日所有monitor类型股票从2021-02-01 到 2021-09-08 的K线数据。
 
 **请求示例：**
 
 ```
 {  
     type:'monitor',  
+    traget_date:'None' #有监控结果的最后一日  
     start_date:'2021-02-01',
     end_date:'2021-09-08',
     stock_id:''
@@ -67,7 +69,7 @@ type_option：
 **回报示例：**
 
 ```
-// id:[id,trade_date,open_price,close_prcie,low_price,high_price,turn_over_rate,point_type,0,0,0]
+// id:[id,trade_date,open_price,close_price,low_price,high_price,turnover_rate,point_type,0,0,0]
 {  
     "002962":[
        ["002962","2020-01-03",12.1,12.5,11.9,12.9,2.1,"n",0,0,0],
