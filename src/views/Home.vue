@@ -6,7 +6,6 @@
           {{item.name}}
         </router-link>
       </div>
-      <div></div>
     </header>
     <div class="page-container main-container">
       <router-view></router-view>
@@ -30,7 +29,10 @@ export default {
   },
   methods: {
     clickFunc(){
-      this.$baseLoading("哈哈哈")
+      const loading = this.$baseLoading()
+      setTimeout(()=>{
+        loading.close()
+      },1000)
     }
   }
 }
