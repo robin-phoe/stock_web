@@ -42,11 +42,11 @@ type_option：
 
 ```
 {  
-    type:'monitor',  
-    traget_date:'None' #有监控结果的最后一日  
-    start_date:'2021-02-01',
-    end_date:'2021-09-08',
-    stock_id:''
+    "type:"monitor",  
+    "traget_date":"None" #有监控结果的最后一日  
+    "start_date":"2021-02-01",
+    "end_date":"2021-09-08",
+    "stock_id":""
 }
 ```
 
@@ -79,5 +79,25 @@ type_option：
     "002963":[
        ···
       ]
+}
+```
+
+###/algo_monitor  
+
+**描述**：获取实时的监控变动数据。  
+
+**请求参数: -POST**
+
+|  参数名 | 类型 | 是否必须 | 说明 |
+|  ----  | ----  | ---- | ---- |
+| type  | str    |   Y  |{监控:"monitor", 热门回撤:"retracement", 单涨停回撤："single_limit"}|
+|target| str |   Y |'YYYY-mm-dd',查询指定日期的监控结果，None为最后交易日|
+
+**请求示例：**
+
+```
+{  
+    "type:"monitor",  
+    "traget_date":"None" #有监控结果的最后一日  
 }
 ```
