@@ -86,7 +86,7 @@ type_option：
 }
 ```
 
-###/algo_monitor  
+###/monitor/algo_monitor  
 
 **描述**：获取实时的监控变动数据。  
 
@@ -150,3 +150,4 @@ type_option：
             }
         }
 }
+```
