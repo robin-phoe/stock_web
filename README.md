@@ -70,15 +70,19 @@ type_option：
 
 ```
 // id:[id,trade_date,open_price,close_price,low_price,high_price,turnover_rate,point_type,0,0,0]
-{  
-    "002962":[
-       ["002962","2020-01-03",12.1,12.5,11.9,12.9,2.1,"n",0,0,0],
-       ["002962","2020-01-04",12.5,12.7,12.1,12.85,2.3,"h",0,0,0],
-       ···
-      ]
-    "002963":[
-       ···
-      ]
+{
+    "code":"200",
+    "message":"请求成功",
+    "data":{  
+        "002962":[
+           ["002962","2020-01-03",12.1,12.5,11.9,12.9,2.1,"n",0,0,0],
+           ["002962","2020-01-04",12.5,12.7,12.1,12.85,2.3,"h",0,0,0],
+           ···
+          ]
+        "002963":[
+           ···
+          ]
+        }
 }
 ```
 
@@ -93,6 +97,7 @@ type_option：
 | type  | str    |   Y  |{监控:"monitor", 热门回撤:"retracement", 单涨停回撤："single_limit"}|
 |target| str |   Y |'YYYY-mm-dd',查询指定日期的监控结果，None为最后交易日|
 
+需求示例：请求最后交易日所有监控类中股票的algo信息（股票横栏中信息）
 **请求示例：**
 
 ```
@@ -101,3 +106,47 @@ type_option：
     "traget_date":"None" #有监控结果的最后一日  
 }
 ```
+
+**回报参数：**  
+
+|  参数名 | 类型 | 说明 |
+|  ----  | ----  | ---- |
+| id          | str    |股票编号|
+| name  | str    |股票名称|
+| grade  | float    |当前分数|
+| price | float    |当前价|
+| increase   | float    |当前涨幅|
+| bk  | str    |板块|
+| bk_increase | float |板块当前涨幅|
+| bk_sort  | int    |板块在所有板块中排名|
+| in_sort  | int    |股票在当前板块中排名|
+| concept  | str    |热门概念(股票所有概念中涨幅最高的概念)|
+| concept_increase | float    |热门概念当前涨幅|
+| monitor_type | str    |监控的类型|
+
+**回报示例：**
+
+```
+{
+    "code":"200",
+    "message":"请求成功",
+    "data":{  
+        "003853":{
+                "id":"003853",
+                "name":"洪都航空",
+                "grade":105.1,
+                "price":39.5,
+                "increase":9.0,
+                "bk":"航空航天",
+                "bk_increase":3.25,
+                "bk_sort":2,
+                "in_sort":5,
+                "concept":"大飞机",
+                "concept_increase":5,
+                "monitor_type":"热门回撤",
+            }
+        "002963":{
+                ···
+            }
+        }
+}
