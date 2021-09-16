@@ -142,8 +142,9 @@ type_option：
             "bk_increase":3.25,
             "bk_sort":2,
             "in_sort":5,
-            "concept":"大飞机",
-            "concept_increase":5,
+            "concept_list":["大飞机","军工"，"锂电池"],
+            "hot_concept":"大飞机",
+            "hot_concept_increase":5,
             "monitor_type":"热门回撤",
             },
         {
