@@ -8,7 +8,7 @@
 
 ###/k_line
 
-**描述**：查询绘制日K线的历史数据。  
+**描述**：查询绘制日K线的历史数据。每日只需要请求一次。  
 
 **日K完整图例子：**  
 ![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/%E6%97%A5k%E7%BA%BF%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B.png)  
@@ -78,7 +78,7 @@ type_option：
            ["002962","2020-01-03",12.1,12.5,11.9,12.9,2.1,"n",0,0,0],
            ["002962","2020-01-04",12.5,12.7,12.1,12.85,2.3,"h",0,0,0],
            ···
-          ]
+          ],
         "002963":[
            ···
           ]
@@ -130,24 +130,24 @@ type_option：
 {
     "code":"200",
     "message":"请求成功",
-    "data":{  
-        "003853":{
-                "id":"003853",
-                "name":"洪都航空",
-                "grade":105.1,
-                "price":39.5,
-                "increase":9.0,
-                "bk":"航空航天",
-                "bk_increase":3.25,
-                "bk_sort":2,
-                "in_sort":5,
-                "concept":"大飞机",
-                "concept_increase":5,
-                "monitor_type":"热门回撤",
-            }
-        "002963":{
+    "data":[ 
+        {
+            "id":"003853",
+            "name":"洪都航空",
+            "grade":105.1,
+            "price":39.5,
+            "increase":9.0,
+            "bk":"航空航天",
+            "bk_increase":3.25,
+            "bk_sort":2,
+            "in_sort":5,
+            "concept":"大飞机",
+            "concept_increase":5,
+            "monitor_type":"热门回撤",
+            },
+        {
                 ···
             }
-        }
+        ]
 }
 ```
