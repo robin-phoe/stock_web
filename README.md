@@ -120,8 +120,9 @@ type_option：
 | bk_increase | float |板块当前涨幅|
 | bk_sort  | int    |板块在所有板块中排名|
 | in_sort  | int    |股票在当前板块中排名|
-| concept  | str    |热门概念(股票所有概念中涨幅最高的概念)|
-| concept_increase | float    |热门概念当前涨幅|
+| concept_list  | list    |概念(详情页中使用)|
+| hot_concept  | str    |热门概念(股票所有概念中涨幅最高的概念)|
+| hot_concept_increase | float    |热门概念当前涨幅|
 | monitor_type | str    |监控的类型|
 
 **回报示例：**
