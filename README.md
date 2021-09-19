@@ -85,7 +85,67 @@ type_option：
         }
 }
 ```
+###/time_line  
 
+**描述**：获取分时数据。  
+
+**请求参数: -POST**
+
+|  参数名 | 类型 | 是否必须 | 说明 |
+|  ----  | ----  | ---- | ---- |
+| type  | str    |   Y  |type_option (见上)|
+|target| str |   N |'YYYY-mm-dd',查询指定日期的分时数据，None为最后交易日|
+|stock_id| str |   N |股票编号，当type为'single'时必填,eg:'002963'|
+
+需求示例：请求最后交易日所有监控类中股票的分时信息
+**请求示例：**
+
+```
+{  
+    "type:"monitor",  
+    "target_date":"None" #有监控结果的最后一日  
+    "stock_id":""  
+}
+```
+
+**回报参数：**  
+
+|  参数名 | 类型 | 说明 |
+|  ----  | ----  | ---- |
+| timestamp    | str    |时间戳|
+| id          | str    |股票编号|
+| name  | str    |股票名称|
+| price | float    |当前价|
+| increase   | float    |当前涨幅|
+| volume  | str    |分时成交量|
+| volume_rate  | float    |量比|
+| turnover  | float    |换手率|
+| volume_money | float    |成交金额|
+
+**回报示例：**
+
+```
+{
+    "code":"200",
+    "message":"请求成功",
+    "data":[ 
+        {
+            "timestamp":"1631714611.386232",
+            "id":"003853",
+            "name":"洪都航空",
+            "price":39.5,
+            "increase":9.0,
+            "volume":35109,
+            "volume_rate":0.44,
+            "turnover":0.29,
+            "volume_money":8.84,
+            },
+        {
+                ···
+            }
+        ]
+}
+```
 ###/monitor/algo_monitor  
 
 **描述**：获取实时的监控变动数据。  
