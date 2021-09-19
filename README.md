@@ -103,7 +103,7 @@ type_option：
 ```
 {  
     "type:"monitor",  
-    "traget_date":"None" #有监控结果的最后一日  
+    "target_date":"None" #有监控结果的最后一日  
 }
 ```
 
@@ -119,7 +119,7 @@ type_option：
 | bk  | str    |板块|
 | bk_increase | float |板块当前涨幅|
 | bk_sort  | int    |板块在所有板块中排名|
-| in_sort  | int    |股票在当前板块中排名|
+| in_sort  | str    |股票在当前板块中排名,"2/12",板块内总共12支股票，排名第二|
 | concept_list  | list    |概念(详情页中使用)|
 | hot_concept  | str    |热门概念(股票所有概念中涨幅最高的概念)|
 | hot_concept_increase | float    |热门概念当前涨幅|
@@ -141,7 +141,7 @@ type_option：
             "bk":"航空航天",
             "bk_increase":3.25,
             "bk_sort":2,
-            "in_sort":5,
+            "in_sort":"2/12",
             "concept_list":["大飞机","军工"，"锂电池"],
             "hot_concept":"大飞机",
             "hot_concept_increase":5,
