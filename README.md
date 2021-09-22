@@ -1,8 +1,12 @@
 #stcok_server  
 
 **原型图**  
+监控页面原型图：  
 ![Image text](https://github.com/robin-phoe/stock_server/blob/master/data_image/%E5%8E%9F%E5%9E%8B%E5%9B%BE(%E4%B8%BB%E9%A1%B5%E9%9D%A2).png)  
+板块页面原型图：  
+![Image text](https://github.com/robin-phoe/stock_web/blob/master/data_image/%E6%9D%BF%E5%9D%97%E5%8E%9F%E5%9E%8B%E5%9B%BE.png)  
 说明文档图片资料在data_image文件夹下  
+
 
 ##端口说明:
 
