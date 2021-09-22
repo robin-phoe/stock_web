@@ -146,6 +146,126 @@ type_option：
         ]
 }
 ```
+###bk_k_line
+**描述**：获取板块日K数据。 
+**请求参数: -POST**
+
+|  参数名 | 类型 | 是否必须 | 说明 |
+|  ----  | ----  | ---- | ---- |
+| type  | str    |   Y  |{"all":所有板块,"single":指定板块}|
+|start_date| str |   Y |k线数据查询起始日期 'YYYY-mm-dd'(包含当日)|
+|end_date| str |   Y |k线数据查询截至日期 'YYYY-mm-dd'(包含当日)|
+|bk_id| str |   N |板块编号，当type为'single'时必填,eg:'BK0420'|
+
+
+需求示例：查询所有板块从2021-02-01 到 2021-09-08 的K线数据。
+
+**请求示例：**
+
+```
+{  
+    "type:"all",  
+    "start_date":"2021-02-01",
+    "end_date":"2021-09-08",
+    "bk_id":""
+}
+```
+
+**回报参数：**  
+
+|  参数名 | 类型 | 说明 |
+|  ----  | ----  | ---- |
+| id          | str    |板块编号|
+| trade_date  | str    |日期 'YYYY-mm-dd'|
+| open_price  | float    |开盘价|
+| close_prcie | float    |收盘价|
+| low_price   | float    |当日最低价|
+| high_price  | float    |当日最高价|
+| turn_over_rate | float |当日换手率|
+| 0  | float    |占位|
+| 0  | float    |占位|
+| 0  | float    |占位|
+| 0  | float    |占位|
+
+**回报示例：**
+
+```
+// id:[id,trade_date,open_price,close_price,low_price,high_price,turnover_rate,0,0,0,0]
+{
+    "code":"200",
+    "message":"请求成功",
+    "data":{  
+        "BK0420":[
+           ["002962","2020-01-03",12.1,12.5,11.9,12.9,2.1,0,0,0,0],
+           ["002962","2020-01-04",12.5,12.7,12.1,12.85,2.3,0,0,0,0],
+           ···
+          ],
+        "BK0421":[
+           ···
+          ]
+        }
+}
+```
+###/bk_time_line  
+
+**描述**：获取板块分时数据。  
+
+**请求参数: -POST**
+
+|  参数名 | 类型 | 是否必须 | 说明 |
+|  ----  | ----  | ---- | ---- |
+| type  | str    |   Y  |{"all":所有板块,"single":指定板块}|
+|target| str |   N |'YYYY-mm-dd',查询指定日期的分时数据，None为最后交易日|
+|bk_id| str |   N |板块编号，当type为'single'时必填,eg:'BK0420'|
+
+需求示例：请求最后交易日所有板块的分时信息
+**请求示例：**
+
+```
+{  
+    "type:"all",  
+    "target_date":"None" #有监控结果的最后一日  
+    "bk_id":""  
+}
+```
+
+**回报参数：**  
+
+|  参数名 | 类型 | 说明 |
+|  ----  | ----  | ---- |
+| timestamp    | str    |时间戳|
+| id          | str    |股票编号|
+| name  | str    |股票名称|
+| price | float    |当前价|
+| increase   | float    |当前涨幅|
+| volume  | str    |分时成交量|
+| volume_rate  | float    |量比|
+| turnover  | float    |换手率|
+| volume_money | float    |成交金额|
+
+**回报示例：**
+
+```
+{
+    "code":"200",
+    "message":"请求成功",
+    "data":[ 
+        {
+            "timestamp":"1631714611.386232",
+            "id":"BK0420",
+            "name":"民用航空",
+            "price":39.5,
+            "increase":9.0,
+            "volume":35109,
+            "turnover":0.29,
+            },
+        {
+                ···
+            }
+        ]
+}
+```
+
 ###/monitor/algo_monitor  
 
 **描述**：获取实时的监控变动数据。  
