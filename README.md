@@ -46,7 +46,7 @@ type_option：
 
 ```
 {  
-    "type:"monitor",  
+    "type":"monitor",  
     "traget_date":"None" #有监控结果的最后一日  
     "start_date":"2021-02-01",
     "end_date":"2021-09-08",
