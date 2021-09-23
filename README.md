@@ -106,7 +106,7 @@ type_option：
 
 ```
 {  
-    "type:"monitor",  
+    "type":"monitor",  
     "target_date":"None" #有监控结果的最后一日  
     "stock_id":""  
 }
@@ -132,22 +132,22 @@ type_option：
 {
     "code":"200",
     "message":"请求成功",
-    "data":[ 
-        {
-            "timestamp":"1631714611.386232",
-            "id":"003853",
-            "name":"洪都航空",
-            "price":39.5,
-            "increase":9.0,
-            "volume":35109,
-            "volume_rate":0.44,
-            "turnover":0.29,
-            "volume_money":8.84,
-            },
-        {
-                ···
-            }
-        ]
+    "data":{ 
+            "003853":{
+                "timestamp":"1631714611.386232",
+                "id":"003853",
+                "name":"洪都航空",
+                "price":39.5,
+                "increase":9.0,
+                "volume":35109,
+                "volume_rate":0.44,
+                "turnover":0.29,
+                "volume_money":8.84,
+                },
+            "003854":{
+                    ···
+                }
+        }
 }
 ```
 ###bk_k_line  
@@ -168,7 +168,7 @@ type_option：
 
 ```
 {  
-    "type:"all",  
+    "type":"all",  
     "start_date":"2021-02-01",
     "end_date":"2021-09-08",
     "bk_id":""
@@ -227,7 +227,7 @@ type_option：
 
 ```
 {  
-    "type:"all",  
+    "type":"all",  
     "target_date":"None" #有监控结果的最后一日  
     "bk_id":""  
 }
@@ -253,20 +253,20 @@ type_option：
 {
     "code":"200",
     "message":"请求成功",
-    "data":[ 
-        {
-            "timestamp":"1631714611.386232",
-            "id":"BK0420",
-            "name":"民用航空",
-            "price":39.5,
-            "increase":9.0,
-            "volume":35109,
-            "turnover":0.29,
-            },
-        {
-                ···
-            }
-        ]
+    "data":{ 
+            "BK0420":{
+                "timestamp":"1631714611.386232",
+                "id":"BK0420",
+                "name":"民用航空",
+                "price":39.5,
+                "increase":9.0,
+                "volume":35109,
+                "turnover":0.29,
+                },
+            "BK0421":{
+                    ···
+                }
+        }
 }
 ```
 
@@ -287,7 +287,7 @@ type_option：
 
 ```
 {  
-    "type:"monitor",  
+    "type":"monitor",  
     "target_date":"None" #有监控结果的最后一日  
 }
 ```
