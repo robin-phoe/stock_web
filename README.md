@@ -347,7 +347,7 @@ type_option：
 
 |  参数名 | 类型 | 是否必须 | 说明 |
 |  ----  | ----  | ---- | ---- |
-| type  | str    |   Y  |type_option (见上)|
+| type  | str    |   Y  |{监控:"monitor", 热门回撤:"retracement", 单涨停回撤："single_limit"}|
 |target| str |   N |'YYYY-mm-dd',查询指定日期的分时数据，None为最后交易日|
 |bk_id| str |   N |板块编号，当type为'single'时必填,eg:'BK0420'|
 
