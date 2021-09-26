@@ -11,13 +11,21 @@ module.exports = {
     assetsDir: 'static',
     lintOnSave: process.env.NODE_ENV === 'development',
     devServer: {
-        port: port,
-        host: '127.0.0.1',
-        open: true,
-        overlay: {
-          warnings: false,
-          errors: true
-        }
+      port:port,
+      open:true,
+      overlay:{
+        warnings:false,
+        errors:false
+      },
+      proxy: {
+          '/api': {
+              target: 'http://doubleinsevenday.webhop.me:1573',//后端接口地址
+              changeOrigin: true,
+              pathRewrite: {
+                '^/api/': ''
+              }
+          }
+      },
     },
     configureWebpack: {
         // provide the app's title in webpack's name field, so that

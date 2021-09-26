@@ -3,16 +3,16 @@ import axios from 'axios'
 import qs from 'qs'
 
 const service = axios.create({
-    baseURL: "http://doubleinsevenday.wenhop.me:1573/",
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      }, // 设置传输内容的类型和编码
+    baseURL: "/api",
+    // headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    //   }, // 设置传输内容的类型和编码
     timeout: 60000 // request timeout
 })
 
 service.interceptors.request.use(
     config => {
-        console.log(config);
+        // console.log(config);
         if (
           config.data &&
           config.headers['Content-Type'] === 'application/x-www-form-urlencoded;charset=UTF-8'

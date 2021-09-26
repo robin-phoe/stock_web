@@ -10,58 +10,102 @@
     <el-divider content-position="left"></el-divider>
     <div class="monitor-content">
       <div class="content-left">
-        <el-table
-          :data="tableData"
-          ref="table"
-          border
-          :height="tableHeight"
-          style="width: 100%;">
-          <el-table-column
-            fixed
-            type="index"
-            :index="indexMethod">
-          </el-table-column>
-          <el-table-column
-            prop="date"
-            label="名称"
-            width="150">
-          </el-table-column>
-          <el-table-column
-            prop="name"
-            label="ID"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="province"
-            label="分数"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="city"
-            label="价格"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="address"
-            label="涨幅"
-            width="300">
-          </el-table-column>
-          <el-table-column
-            prop="zip"
-            label="分时图"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            fixed="right"
-            label="操作"
-            width="100">
-            <template slot-scope="scope">
-              <el-button @click="handleClick(scope.row)" type="text" size="small">查看详情</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+          <div class="table-item table-head">
+            <div class="table-cell">
+                name
+            </div>
+            <div class="table-cell">
+               id
+            </div>
+            <div class="table-cell">
+                分数
+            </div>
+            <div class="table-cell">
+                价格
+            </div>
+            <div class="table-cell">
+                涨幅
+            </div>
+            <div class="table-cell cell-chart">
+                分数图
+            </div>
+            <div class="table-cell cell-chart">
+                分时图
+            </div>
+            <div class="table-cell cell-chart">
+                日K
+            </div>
+            <div class="table-cell">
+                板块
+            </div>
+            <div class="table-cell">
+                板块涨幅
+            </div>
+            <div class="table-cell">
+                板块排名
+            </div>
+            <div class="table-cell">
+                板块内排名
+            </div>
+            <div class="table-cell">
+                热门概念
+            </div>
+            <div class="table-cell">
+                概念涨幅
+            </div>
+            <div class="table-cell">
+                监控类型
+            </div>
+          </div>
+          <div class="table-center">
+            <div class="grade-cell">
+              <div class="grade-title" @click="is_show_grate = !is_show_grate">
+                <p>大于100</p>
+                <i class="el-icon-arrow-right" :class="is_show_grate?'trans':''"></i>
+              </div>
+              <div class="grade-center" v-if="is_show_grate">
+                  <div v-for="(item) in grate" :key="item.id">
+                    <table-item :itemInfo="item"></table-item>
+                  </div>
+              </div>
+            </div>
+            <div class="grade-cell">
+              <div class="grade-title" style="background:#fdf6ec" @click="is_show_good = !is_show_good">
+                <p>90~100</p>
+                <i class="el-icon-arrow-right" :class="is_show_good?'trans':''"></i>
+              </div>
+              <div class="grade-center" v-if="is_show_good">
+                  <div v-for="(item) in good" :key="item.id">
+                    <table-item :itemInfo="item"></table-item>
+                  </div>
+              </div>
+            </div>
+            <div class="grade-cell">
+              <div class="grade-title"  style="background:#f4f4f5" @click="is_show_nomal = !is_show_nomal">
+                <p>70~90</p>
+                <i class="el-icon-arrow-right" :class="is_show_nomal?'trans':''"></i>
+              </div>
+              <div class="grade-center" v-if="is_show_nomal">
+                  <div v-for="(item) in nomal" :key="item.id">
+                    <table-item :itemInfo="item"></table-item>
+                  </div>
+              </div>
+            </div>
+            <div class="grade-cell">
+              <div class="grade-title" style="background:#f0f9eb" @click="is_show_notPass = !is_show_notPass">
+                <p>小于70</p>
+                <i class="el-icon-arrow-right" :class="is_show_notPass?'trans':''"></i>
+              </div>
+              <div class="grade-center" v-if="is_show_notPass">
+                  <div v-for="(item) in notPass" :key="item.id">
+                    <table-item :itemInfo="item"></table-item>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
       </div>
-      <div class="content-right">
+      <!-- <div class="content-right">
         <div class="charts-item">
           <ChartsItem />
         </div>
@@ -71,7 +115,7 @@
         <div class="charts-item">
           <ChartsItem />
         </div>
-      </div>
+      </div> -->
     </div>
     
   </div>
@@ -79,11 +123,16 @@
 
 <script>
 let timer
-import {test} from '@/api/monitor/index'
+import GetInfo from '@/api/monitor/index'
 import ChartsItem from './components/ChartItem.vue'
+import TableItem from './components/TableItem.vue'
+import Line from './components/Line.vue'
+
 export default {
   components: {
-    ChartsItem
+    ChartsItem,
+    TableItem,
+    Line
   },
   methods:{
     handleClick(row) {
@@ -96,58 +145,60 @@ export default {
   data(){
     return {
       tableHeight: 100,
-      tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1519 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        }]
+      grate:[],
+      is_show_grate:false,
+      good:[],
+      is_show_good:false,
+      nomal:[],
+      is_show_nomal:false,
+      notPass:[],
+     is_show_notPass:false
     }
   },
   mounted(){
-    test().then(res=>{
-      console.log(res)
+    
+    let updata = {  
+      type:"monitor",  
+      target_date:"None" 
+    }
+     GetInfo.get_info(updata).then(async (res)=> {
+      let data = res.data.data
+      let info = {
+        type:"monitor",  
+        target_date:"None" ,
+      }
+      let line_data = ''
+      await GetInfo.get_line(info).then(re => {
+          line_data = re.data.data
+      })
+      let info2 = {
+        start_date:'2021-8-25',
+        end_date:'2021-9-25',
+        ...info
+      }
+      await GetInfo.get_k(info2).then(re => {
+
+      })
+      let grade_arr = ''
+      await GetInfo.get_grade(info).then(re => {
+        grade_arr = res.data.data
+      })
+      console.log(line_data,grade_arr)
+      data.forEach(item => {
+        item.grade_arr = grade_arr[item.id]
+        item.line_arr = line_data[item.id]
+         if(item.grade > 100) {
+           this.grate.push(item)
+         } else if( item.grade >= 90) {
+           this.good.push(item)
+         } else if( item.grade >= 70) {
+           this.nomal .push(item)
+         }else {
+           this.notPass.push(item)
+         }
+       })
+      console.log(this.grate)
     })
-    // if(this.tableData.length < 50){
-    //   timer = setInterval(()=>{
-        
-    //       if(this.tableData.length < 50){
-    //         this.tableData.push({
-    //           date: '2016-05-03',
-    //           name: '王小虎',
-    //           province: '上海',
-    //           city: '普陀区',
-    //           address: '上海市普陀区金沙江路 1516 弄',
-    //           zip: 200333
-    //         })
-    //       }else{
-    //         clearInterval(timer)
-    //       }
-    //   }, 10)
-    // }
     this.$nextTick(() =>{
       // 根据浏览器高度设置初始高度
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 70
@@ -170,7 +221,8 @@ export default {
     width: 100%;
     display: flex;
     .content-left{
-      flex: 1;
+      // flex: 1;
+      width: 100%;
     }
     .content-right {
       width: 400px;
@@ -187,5 +239,52 @@ export default {
       margin-bottom: 10px;
     }
   }
-  
+  .table-item {
+    width: 100%;
+    .table-cell {
+        width: 100px;
+        height: 60px;
+        display: inline-block;
+        line-height: 60px;
+        text-align: center;
+    }
+    .cell-chart {
+      width: 200px;
+    }
+  }
+  .table-center {
+    height: calc(100% - 100px);
+    overflow-y: auto;
+  }
+  .grade-cell {
+    width: 100%;
+    // height: 40px;
+    display: block;
+    cursor: pointer;
+    line-height: 40px;
+    margin: 5px 0;
+    .grade-title {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      display: flex;
+      background: #fef0f0;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        margin-left: 20px;
+      }
+      >i {
+        margin-right: 20px;
+        transition: 0.5s;
+      }
+    }
+    .grade-center{
+      width: 100%;
+       transition: 1s;
+    }
+  }
+  .trans {
+    transform:rotate(90deg);
+  }
 </style>
