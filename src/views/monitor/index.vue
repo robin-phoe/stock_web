@@ -64,7 +64,7 @@
                 <i class="el-icon-arrow-right" :class="is_show_grate?'trans':''"></i>
               </div>
               <div class="grade-center" v-if="is_show_grate">
-                  <div v-for="(item) in grate" :key="item.id">
+                  <div v-for="(item ,index) in grate" :key="item.id">
                     <table-item :itemInfo="item"></table-item>
                   </div>
               </div>
@@ -181,7 +181,7 @@ export default {
       })
       let grade_arr = ''
       await GetInfo.get_grade(info).then(re => {
-        grade_arr = res.data.data
+        grade_arr = re.data.data
       })
       console.log(line_data,grade_arr)
       data.forEach(item => {

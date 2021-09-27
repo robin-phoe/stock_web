@@ -16,7 +16,7 @@
            {{itemInfo.increase}}
         </div>
         <div class="table-cell cell-chart">
-            <!-- <line :x_data="itemInfo.grade_arr.x_axis" :y_data="itemInfo.grade_arr.data"></line> -->
+            <line-c :x_data="itemInfo.grade_arr.x_axis" :y_data="itemInfo.grade_arr.data"></line-c>
         </div>
         <div class="table-cell cell-chart">
             <line-c :x_data="itemInfo.line_arr.x_axis" :y_data="itemInfo.line_arr.data"></line-c>
@@ -76,6 +76,7 @@ export default {
         display: inline-block;
         line-height: 60px;
         text-align: center;
+        vertical-align: top;
     }
     .cell-chart {
       width: 200px;
