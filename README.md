@@ -89,6 +89,70 @@ type_option：
         }
 }
 ```
+###/k_line_simple
+
+**描述**：日K线缩略图数据。每日只需要请求一次。  
+
+
+**请求参数: -POST**
+
+|  参数名 | 类型 | 是否必须 | 说明 |
+|  ----  | ----  | ---- | ---- |
+| type  | str    |   Y  |type_option (见下)|
+|target| str |   Y |'YYYY-mm-dd',查询指定日期的监控结果，监控类type必填，"None"为最后交易日|
+|stock_id| str |   N |股票编号，当type为'single'时必填,eg:'002963'|
+
+type_option：
+
+|  参数名 | 类型 | 是否必须 | 说明 |
+|  ----  | ----  | ---- | ---- |
+| all  | str    |   N  |查询全部股票的K线数据|
+|single| str |   N |查询单个股票的K线数据|
+| monitor  | str    |   N  |查询全部监控股票的K线数据（retracement,single_limit···是monitor 的子集）|
+|retracement| str |   N |查询热门回撤类中所有股票的K线数据|
+|single_limit| str |   N |查询单涨停回撤类中所有股票的K线数据|
+
+需求示例：查询最后一个交易日所有monitor类型股票的K线缩略图数据。
+
+**请求示例：**
+
+```
+{  
+    "type":"monitor",  
+    "traget_date":"None" #有监控结果的最后一日  
+    "stock_id":""
+}
+```
+
+**回报参数：**  
+
+|  参数名 | 类型 | 说明 |
+|  ----  | ----  | ---- |
+| open_price  | float    |开盘价|
+| close_prcie | float    |收盘价|
+| low_price   | float    |当日最低价|
+| high_price  | float    |当日最高价|
+
+**回报示例：**
+
+```
+// id:[id,trade_date,open_price,close_price,low_price,high_price,turnover_rate,point_type,0,0,0]
+{
+    "code":"200",
+    "message":"请求成功",
+    "data":{  
+        "002962":[
+           [12.1,12.5,11.9,12.9],
+           [12.5,12.7,12.1,12.85],
+           ···
+          ],
+        "002963":[
+           ···
+          ]
+        }
+}
+```
+
 ###/time_line  
 
 **描述**：获取分时数据。  
