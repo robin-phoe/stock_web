@@ -165,9 +165,15 @@ export default {
         ...info
       }
       let k_arr = ''
-      await GetInfo.get_k(info2).then(re => {
-        k_arr = re.data.data
-      })
+      if(this.K_data.length == 0 ) {
+        await GetInfo.get_k_all(info2).then(re => {
+          k_arr = re.data.data
+          this.K_data = k_arr
+        })
+      } else  {
+        k_arr = this.K_data
+      }
+      
       let grade_arr = ''
       await GetInfo.get_grade(info).then(re => {
         grade_arr = re.data.data
@@ -204,7 +210,8 @@ export default {
       nomal:[],
       is_show_nomal:false,
       notPass:[],
-     is_show_notPass:false
+     is_show_notPass:false,
+      K_data:[],
     }
   },
   mounted(){

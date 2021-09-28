@@ -31,9 +31,17 @@ function get_k(data) {
         data
     })
 }
+function get_k_all(data) {
+    return request({
+        url:'/k_line_simple',
+        method: 'post',
+        data
+    })
+}
 export default ({
     get_info,
     get_grade,
     get_line,
     get_k,
+    get_k_all
 })

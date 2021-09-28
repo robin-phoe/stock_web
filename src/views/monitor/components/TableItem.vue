@@ -22,7 +22,7 @@
             <line-c :x_data="itemInfo.line_arr.x_axis" :color="itemInfo.increase>=0?'red':'green'" :y_data="itemInfo.line_arr.data"></line-c>
         </div>
         <div class="table-cell cell-chart">
-            日K
+           <moni :e_data="itemInfo.k_arr"></moni>
         </div>
         <div class="table-cell">
             {{itemInfo.bk}}
@@ -51,10 +51,12 @@
 
 <script>
 import LineC from './Line.vue'
+import Moni from './moni.vue'
 
 export default {
      components: {
-        LineC
+        LineC,
+        Moni
     },
     name:'table-item',
     props:['itemInfo'],
@@ -70,8 +72,10 @@ export default {
 <style lang="scss" scoped>
 .table-item {
     width: 100%;
+   
     .table-cell {
         width: 100px;
+        margin: 3px 0;
         height: 60px;
         display: inline-block;
         line-height: 60px;

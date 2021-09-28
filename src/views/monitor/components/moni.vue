@@ -6,37 +6,41 @@
 
 <script>
 export default {
+    props:['e_data'],
     methods:{
         init(){
             // 基于准备好的dom，初始化echarts实例
             var myChart = this.$echart.init(this.$refs.main);
             // 绘制图表
+            let arr = []
+            this.e_data.forEach(item => {
+                arr.push('')
+            })
             myChart.setOption({
                 title: {
-                    text: '分时量图'
                 },
                  xAxis: {
-                    data: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27']
+                    data:arr,
+                    show:false
                 },
-                yAxis: {},
+                grid: {
+                    top: 3,
+                    left: 6,
+                    right: 6,
+                    bottom: 2
+                },
+                yAxis: {
+                    show:false
+                },
                 series: [{
-                    type: 'k',
-                    data: [
-                        [20, 34, 10,38],
-                        [40, 35, 30, 50],
-                        [31, 38, 33, 44],
-                        [38, 15, 5, 42]
-                    ]
+                    type: 'candlestick',
+                    data: this.e_data
                 }]
             });
         }
     },
     mounted(){
-        this.$nextTick(()=>{
-            setTimeout(()=>{
-                this.init()
-            },20)
-        })
+       this.init()
     }
 }
 </script>
@@ -45,8 +49,8 @@ export default {
     .chart-item-wrapper{
         width: 100%;
         height: 100%;
-        background: #fff;
-        border:1px solid #ccc;
-        margin-bottom: 10px;
+        // background: #fff;
+        // border:1px solid #ccc;
+        // margin-bottom: 10px;
     }
 </style>
