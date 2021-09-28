@@ -7,6 +7,7 @@
       <el-button icon="el-icon-delete">热门波形</el-button>
       <el-button icon="el-icon-delete">热门小波形</el-button>
     </el-button-group>
+    <el-button class="change-data" @click="get_all_info" icon="el-icon-refresh" circle></el-button>
     <el-divider content-position="left"></el-divider>
     <div class="monitor-content">
       <div class="content-left">
@@ -64,7 +65,7 @@
                 <i class="el-icon-arrow-right" :class="is_show_grate?'trans':''"></i>
               </div>
               <div class="grade-center" v-if="is_show_grate">
-                  <div v-for="(item ,index) in grate" :key="item.id">
+                  <div v-for="(item) in grate" :key="item.id">
                     <table-item :itemInfo="item"></table-item>
                   </div>
               </div>
@@ -126,13 +127,11 @@ let timer
 import GetInfo from '@/api/monitor/index'
 import ChartsItem from './components/ChartItem.vue'
 import TableItem from './components/TableItem.vue'
-import Line from './components/Line.vue'
 
 export default {
   components: {
     ChartsItem,
     TableItem,
-    Line
   },
   methods:{
     handleClick(row) {
@@ -140,23 +139,12 @@ export default {
     },
     indexMethod(index){
       return index
-    }
-  },
-  data(){
-    return {
-      tableHeight: 100,
-      grate:[],
-      is_show_grate:false,
-      good:[],
-      is_show_good:false,
-      nomal:[],
-      is_show_nomal:false,
-      notPass:[],
-     is_show_notPass:false
-    }
-  },
-  mounted(){
-    
+    },
+    get_all_info() {
+    let grate = []
+    let good = []
+    let nomal = []
+    let notPass = []
     let updata = {  
       type:"monitor",  
       target_date:"None" 
@@ -176,29 +164,54 @@ export default {
         end_date:'2021-9-25',
         ...info
       }
+      let k_arr = ''
       await GetInfo.get_k(info2).then(re => {
-
+        k_arr = re.data.data
       })
       let grade_arr = ''
       await GetInfo.get_grade(info).then(re => {
         grade_arr = re.data.data
       })
-      console.log(line_data,grade_arr)
+      console.log(k_arr)
       data.forEach(item => {
         item.grade_arr = grade_arr[item.id]
         item.line_arr = line_data[item.id]
+        item.k_arr =k_arr[item.id]
          if(item.grade > 100) {
-           this.grate.push(item)
+           grate.push(item)
          } else if( item.grade >= 90) {
-           this.good.push(item)
+           good.push(item)
          } else if( item.grade >= 70) {
-           this.nomal .push(item)
+           nomal .push(item)
          }else {
-           this.notPass.push(item)
+           notPass.push(item)
          }
-       })
-      console.log(this.grate)
+      })
+      this.grate = grate
+      this.good = good
+      this.notPass = notPass
+      this.nomal = nomal
     })
+    }
+  },
+  data(){
+    return {
+      tableHeight: 100,
+      grate:[],
+      is_show_grate:false,
+      good:[],
+      is_show_good:false,
+      nomal:[],
+      is_show_nomal:false,
+      notPass:[],
+     is_show_notPass:false
+    }
+  },
+  mounted(){
+    setInterval((()=> {
+      this.get_all_info()
+    }), 30 * 1000)
+    this.get_all_info()
     this.$nextTick(() =>{
       // 根据浏览器高度设置初始高度
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 70
@@ -215,6 +228,7 @@ export default {
   .monitor-wrapper {
     padding: 10px 10px;
     box-sizing: border-box;
+    position: relative;
   }
   .monitor-content {
     height: calc(100vh - 200px);
@@ -252,6 +266,11 @@ export default {
       width: 200px;
     }
   }
+  .change-data {
+    position: absolute;
+    top:10px;
+    right: 20px;
+  }
   .table-center {
     height: calc(100% - 100px);
     overflow-y: auto;
@@ -268,6 +287,7 @@ export default {
       position: sticky;
       top: 0;
       display: flex;
+      z-index: 20;
       background: #fef0f0;
       justify-content: space-between;
       align-items: center;
